@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Django
+db.sqlite3
+media/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Vercel
+frontend/.vercel/
+
+# Python test/cache
+.pytest_cache/

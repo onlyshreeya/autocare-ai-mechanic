@@ -1,0 +1,9 @@
+Django>=6.1.1
+djangorestframework>=3.18.1
+django-cors-headers>=4.9.0
+python-dotenv>=1.2.3
+google-genai>=2.25.0
+openrouter>=1.2.19
+pillow>=12.3.0
+pydantic>=2.12.0
+pydantic-core>=2.46.0
