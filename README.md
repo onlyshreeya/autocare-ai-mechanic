@@ -1,112 +1,333 @@
-# 🚗 AI Car Mechanic Chatbot
+# AutoCare AI — Your Intelligent Car Mechanic
 
-An intelligent full-stack application that acts as a virtual Senior Automobile Technician to help vehicle owners troubleshoot issues, analyze uploaded media, receive instant diagnoses, and book mechanic appointments.
+An AI-powered car mechanic chatbot that helps users understand vehicle problems, troubleshoot common issues, explore possible diagnoses, and book mechanic appointments — all through a conversational interface.
 
-Built for the **Full-Stack Developer Intern 48-Hour Task**.
+AutoCare AI combines rule-based troubleshooting with Gemini-powered AI to make vehicle assistance more accessible, interactive, and easy to use.
 
----
-
-## ✨ Features at a Glance
-
-- 💬 **Conversational AI Mechanic**: Short, natural 1-on-1 dialogue with a Senior Master Automobile Technician persona.
-- 🎯 **Car-Only Focus**: Strictly filters out non-automotive queries (e.g. coding, recipes, weather).
-- 📸 **Multimodal Media Analysis**: Upload vehicle photos, videos, or audio recordings for visual & auditory issue analysis.
-- ⚡ **Automated Vehicle Diagnosis**: Instant symptom breakdown with severity ratings (Low, Medium, High).
-- 📅 **Mechanic Appointment Booking**: Complete booking workflow with date/time slot validation and confirmation modals.
-- 🎨 **Modern Dark Glassmorphism UI**: Right-aligned user bubbles (subtle green accent) and left-aligned AI bubbles (dark neutral).
+> **Understand the problem. Explore the solution. Get back on the road.**
 
 ---
 
-## 📐 Architecture & AI Cost Minimization
+## Overview
 
-To minimize external API usage and maximize response speed, the backend implements a **Hybrid Intent & Routing Engine**:
+AutoCare AI is a full-stack web application designed to simplify the first step of car troubleshooting.
+
+Instead of searching through scattered forums or struggling to describe a vehicle issue, users can interact with an AI mechanic, explain their symptoms, and receive relevant troubleshooting guidance.
+
+The platform also supports media uploads, diagnosis workflows, and mechanic appointment bookings — bringing multiple vehicle assistance features into one application.
+
+## Features
+
+### AI-Powered Mechanic Chat
+
+* Conversational car troubleshooting assistant.
+* Gemini-powered responses for complex or open-ended queries.
+* Rule-based responses for common vehicle issues.
+* Context-aware conversations for more relevant assistance.
+* Fallback handling when AI responses are unavailable.
+
+### Vehicle Diagnosis
+
+* Submit vehicle symptoms for troubleshooting.
+* Receive possible causes and diagnostic guidance.
+* Use structured diagnosis workflows for common car problems.
+
+### Media Uploads
+
+* Upload relevant media to support a troubleshooting conversation.
+* Associate uploaded media with chat requests.
+* Extend the conversation with additional context about the vehicle issue.
+
+### Mechanic Appointment Booking
+
+* Submit mechanic appointment requests.
+* View booking details using a booking ID.
+* Retrieve booking records.
+* Update booking status through the API.
+
+### Full-Stack Experience
+
+* React-based interactive frontend.
+* Django REST Framework backend.
+* SQLite database for application data.
+* Chat history and booking workflows.
+* Environment-based frontend API configuration.
+
+---
+
+## Tech Stack
+
+| Layer             | Technologies                          |
+| ----------------- | ------------------------------------- |
+| Frontend          | React, Vite, JavaScript               |
+| Backend           | Python, Django, Django REST Framework |
+| Database          | SQLite                                |
+| AI Integration    | Google Gemini API                     |
+| API Communication | REST API                              |
+| Development Tools | Git, GitHub, VS Code                  |
+
+---
+
+## Architecture
 
 ```mermaid
 flowchart TD
-    A[User Input] --> B{Local Intent Router}
-    B -- Greetings / Chit-Chat --> C[Instant Local Response - $0 AI Cost]
-    B -- Non-Automotive Topic --> D[Polite Car-Only Rejection - $0 AI Cost]
-    B -- Common Car Symptoms --> E[Quick Local Knowledge Base - $0 AI Cost]
-    B -- Complex Symptoms / Media --> F[Google Gemini Flash Multimodal API]
+    A[User] --> B[React + Vite Frontend]
+    B --> C[Django REST Framework API]
+
+    C --> D[Rule-Based Troubleshooting]
+    C --> E[Gemini AI Integration]
+    C --> F[Diagnosis Engine]
+
+    C --> G[SQLite Database]
+    G --> H[Chat History]
+    G --> I[Diagnosis Records]
+    G --> J[Booking Records]
+    G --> K[Media Metadata]
 ```
 
-1. **Local Intent Router**: Intercepts greetings and casual chat without calling the Gemini API.
-2. **Domain Guard**: Filters non-car questions locally to save API quota.
-3. **Gemini Flash AI**: Invoked only for complex vehicle troubleshooting, multi-turn follow-ups, or media analysis.
+The React frontend communicates with the Django REST API. The backend handles chat requests, troubleshooting logic, diagnosis workflows, media uploads, and appointment records.
+
+Gemini is used for AI-assisted responses, while rule-based logic supports common troubleshooting scenarios and fallback behavior.
 
 ---
 
-## 🛠️ Technology Stack
+## Project Structure
 
-- **Frontend**: React 18, Vite, Lucide React Icons, Vanilla CSS
-- **Backend**: Python 3.13, Django 6.1, Django REST Framework (DRF)
-- **Database**: SQLite
-- **AI Engine**: Google GenAI SDK (`google-genai`), Gemini 3.6 / 3.7 Flash API
+```text
+autocare-ai-mechanic/
+│
+├── backend/
+│   ├── manage.py
+│   ├── requirements.txt
+│   ├── ...
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── ...
+│
+├── .gitignore
+└── README.md
+```
+
+*The backend and frontend directories may contain additional application-specific files and modules.*
 
 ---
 
-## 📡 REST API Reference
+## Getting Started
 
-All required REST API endpoints are fully implemented and validated:
+Follow these steps to run AutoCare AI locally.
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| **`POST`** | `/api/chat/` | Send message to AI Mechanic assistant with history context & media ID |
-| **`GET`** | `/api/chat/` | Retrieve saved chat conversation history |
-| **`POST`** | `/api/upload/` | Upload vehicle images, videos, or audio files (up to 20MB) |
-| **`POST`** | `/api/diagnosis/` | Generate vehicle symptom diagnosis and severity level |
-| **`GET`** | `/api/diagnosis/` | Retrieve past vehicle diagnosis records |
-| **`POST`** | `/api/booking/` | Create a new mechanic appointment booking |
-| **`GET`** | `/api/booking/{id}/` | Retrieve specific booking details by ID |
-| **`GET`** | `/api/bookings/` | List all mechanic bookings |
+### Prerequisites
 
----
+Make sure you have the following installed:
 
-## 🚀 Quick Start Guide
+* Python
+* Node.js and npm
+* Git
 
-### 1. Backend Setup (Django)
+### 1. Clone the Repository
+
 ```bash
-# 1. Clone repository
-git clone <your-repository-url>
-cd "AI Car Mechanic Chatbot"
+git clone https://github.com/onlyshreeya/autocare-ai-mechanic.git
+cd autocare-ai-mechanic
+```
 
-# 2. Create & activate virtual environment
+### 2. Set Up the Backend
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Create and activate a virtual environment.
+
+**Windows:**
+
+```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-# Linux/macOS: source .venv/bin/activate
-
-# 3. Install dependencies
-pip install django djangorestframework django-cors-headers python-dotenv google-genai
-
-# 4. Configure environment variables
-echo GEMINI_API_KEY="your_gemini_api_key_here" > .env
-
-# 5. Run database migrations & start server
-python manage.py migrate
-python manage.py runserver 8000
+.venv\Scripts\activate
 ```
-Backend will run at `http://127.0.0.1:8000`.
 
-### 2. Frontend Setup (React / Vite)
+Install the required dependencies:
+
 ```bash
-# 1. Navigate to frontend folder
-cd frontend
+pip install -r requirements.txt
+```
 
-# 2. Install packages & start server
+### 3. Configure Environment Variables
+
+Create a `.env` file in the backend directory and add your Gemini API key:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Replace the placeholder with your own API key.
+
+Keep your API key private. Do not commit `.env` files or expose API keys in frontend code.
+
+### 4. Run Database Migrations
+
+```bash
+python manage.py migrate
+```
+
+### 5. Start the Backend Server
+
+```bash
+python manage.py runserver
+```
+
+The Django development server will be available at:
+
+```text
+http://127.0.0.1:8000/
+```
+
+Keep this terminal running.
+
+### 6. Set Up the Frontend
+
+Open a new terminal and navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
 npm install
+```
+
+If your frontend uses an API base URL environment variable, configure it in the frontend's `.env` file:
+
+```env
+VITE_API_BASE_URL=http://127.0.0.1:8000
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
-Frontend will run at `http://localhost:5173`.
+
+Open the local URL displayed by Vite in your terminal.
 
 ---
 
-## ☁️ Deployment Instructions
+## API Reference
 
-- **Frontend (Vercel)**: Import repository into Vercel, set root directory to `frontend`, add `VITE_API_BASE_URL="https://your-backend-api.com"`, and deploy.
-- **Backend (AWS Free Tier / Render / EC2)**: Deploy Django project with Gunicorn (`gunicorn config.wsgi:application --bind 0.0.0.0:8000`) and set `GEMINI_API_KEY` in environment variables.
+The backend exposes REST endpoints for chat, diagnosis, media uploads, and mechanic bookings.
+
+| Method    | Endpoint                     | Description                      |
+| --------- | ---------------------------- | -------------------------------- |
+| GET, POST | `/api/chat/`                 | Retrieve or send chat messages   |
+| POST      | `/api/chat/upload/`          | Upload media for troubleshooting |
+| POST      | `/api/diagnosis/`            | Submit a diagnosis request       |
+| GET       | `/api/diagnosis/`            | Retrieve diagnosis records       |
+| POST      | `/api/booking/`              | Create a mechanic booking        |
+| GET       | `/api/booking/<id>/`         | Retrieve a booking by ID         |
+| GET       | `/api/bookings/`             | Retrieve booking records         |
+| PATCH     | `/api/bookings/<id>/status/` | Update booking status            |
+
+The backend may also expose an upload alias at `/api/upload/`.
+
+**Note:** Request payloads, response structures, validation rules, and supported status values depend on the backend implementation.
 
 ---
 
-## 📄 Evaluation Criteria Compliance
+## Configuration & Security
 
-Built for the **Full-Stack Developer Intern 48-Hour Task**. Designed with high code quality, clean API architecture, responsive dark UI, error handling, and optimal AI usage minimization.
+AutoCare AI uses environment variables for sensitive configuration.
+
+* Keep API keys out of source control.
+* Store secrets in environment variables.
+* Configure the frontend API URL for the environment where the backend is deployed.
+* Do not use Django development settings as production settings.
+* Configure allowed hosts, CORS, and debug settings appropriately before deployment.
+
+Never expose your Gemini API key through client-side React code.
+
+---
+
+## Current Scope & Limitations
+
+AutoCare AI is an AI-assisted troubleshooting application, not a replacement for a qualified mechanic.
+
+* Diagnosis results are possible explanations, not guaranteed vehicle diagnoses.
+* AI responses may occasionally be inaccurate or unavailable.
+* Rule-based troubleshooting covers defined scenarios and may not handle every vehicle issue.
+* Physical inspection may be required to identify or repair a vehicle problem.
+
+For safety-critical vehicle issues, users should consult a qualified mechanic.
+
+---
+
+## Future Improvements
+
+Potential areas for further development:
+
+* More comprehensive vehicle troubleshooting coverage.
+* Improved multimodal diagnosis workflows.
+* Enhanced booking management and appointment tracking.
+* Authentication and personalized user profiles.
+* Expanded testing and production monitoring.
+* Deployment with production-ready security and configuration.
+
+---
+
+## Running Tests
+
+### Backend
+
+From the backend directory:
+
+```bash
+python manage.py test
+```
+
+### Frontend
+
+From the frontend directory:
+
+```bash
+npm run build
+```
+
+These commands can be used to run Django tests and verify that the frontend builds successfully.
+
+---
+
+## Deployment
+
+The application is designed as a separate frontend and backend, allowing each part to be deployed independently.
+
+* **Frontend:** Vercel
+* **Backend:** AWS or another Python-compatible hosting platform
+* **Database:** SQLite for local development; evaluate a production database based on deployment requirements.
+
+Deployment requires production environment variables, a reachable backend API, and appropriate CORS and security configuration.
+
+---
+
+## Author
+
+**Shreeya Srivastava**
+
+B.Tech — Computer Science & Engineering (AI & ML)
+
+GitHub: [@onlyshreeya](https://github.com/onlyshreeya)
+
+---
+
+## A Note
+
+AutoCare AI is a project exploring how AI and full-stack development can come together to create practical, conversational vehicle assistance.
+
+Built with curiosity, code, and a drive to make troubleshooting a little easier.
