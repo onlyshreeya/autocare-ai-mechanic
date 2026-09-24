@@ -11,6 +11,9 @@ Powered by AI, the application provides an interactive chat experience, vehicle 
 
 **GitHub Repository:** [onlyshreeya/autocare-ai-mechanic](https://github.com/onlyshreeya/autocare-ai-mechanic)
 
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8a138ae6-dd3a-4cf4-aba1-e59d214a7b96" />
+
 ---
 
 ## Table of Contents
@@ -98,39 +101,43 @@ The live application includes chat, diagnosis, and booking functionality.
 
 ---
 
+
 ## System Architecture
 
-```text
-                 USER
-                  |
-                  v
-        React + Vite Frontend
-              (Vercel)
-                  |
-                  v
-             HTTPS API
-               ngrok
-                  |
-                  v
-          Django REST API
-              (AWS EC2)
-                  |
-          +-------+-------+
-          |       |       |
-          v       v       v
-        Chat  Diagnosis  Booking
-          |       |       |
-          +-------+-------+
-                  |
-                  v
-           SQLite Database
+The application follows a full-stack architecture where the React frontend communicates with a Django REST API hosted on AWS EC2. The backend manages AI-powered interactions, diagnosis requests, and service bookings.
 
-       Gemini AI powers AI features
+```mermaid
+flowchart TD
+    A([User]) --> B[React + Vite Frontend<br/>Vercel]
+    B -->|HTTPS API Requests| C[ngrok HTTPS Tunnel]
+    C --> D[Django REST Framework API<br/>AWS EC2]
+
+    D --> E[AI Chat]
+    D --> F[Vehicle Diagnosis]
+    D --> G[Service Booking]
+
+    E --> H[(SQLite Database)]
+    F --> H
+    G --> H
+
+    E --> I[Google Gemini AI]
+    F --> I
+
+    style A fill:#2563eb,color:#fff,stroke:#1d4ed8
+    style B fill:#7c3aed,color:#fff,stroke:#6d28d9
+    style C fill:#0891b2,color:#fff,stroke:#0e7490
+    style D fill:#059669,color:#fff,stroke:#047857
+    style H fill:#d97706,color:#fff,stroke:#b45309
+    style I fill:#64748b,color:#fff,stroke:#475569
 ```
 
-The frontend communicates with the Django backend through API requests. The backend handles application logic, database operations, and AI-powered functionality.
+### Architecture Overview
 
----
+- **Frontend:** React and Vite provide the user interface, deployed on Vercel.
+- **HTTPS Tunnel:** ngrok provides HTTPS connectivity to the backend.
+- **Backend:** Django REST Framework handles API requests and application logic on AWS EC2.
+- **AI Integration:** Google Gemini powers AI chat and vehicle diagnosis.
+- **Database:** SQLite stores application data, including chat, diagnosis, and booking records.
 
 ## Application Modules
 
